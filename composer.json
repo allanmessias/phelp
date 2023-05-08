@@ -4,13 +4,14 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Allan\\Phelper\\": "src/"
+            "Phelper\\": "lib/",
+            "App\\": "app/"
         }
     },
     "authors": [
         {
             "name": "allan",
-            "email": "allan.messias@hostweb.com.br"
+            "email": "allanmessiasdecoelho@gmail.com"
         }
     ],
     "require": {}
