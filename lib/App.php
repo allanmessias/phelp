@@ -6,16 +6,17 @@ use Phelper\CliPrinter;
 class App
 {
     protected CliPrinter $printer;
-    protected array $registry = [];
+    protected CommandRegistry $registry;
 
     public function __construct() 
     {
         $this->printer = new CliPrinter();
+        $this->registry = new CommandRegistry();
     }
 
     public function registerCommand(string $name, callable $callable): void
     {
-        $this->registry[$name] = $callable;
+        $this->registry->register($name, $callable);
     }
 
     public function getPrinter()
@@ -23,10 +24,6 @@ class App
         return $this->printer;
     }
 
-    public function getCommand(string $command)
-    {
-        return isset($this->registry[$command]) ? $this->registry[$command] : null;
-    }
 
     public function runCommand(array $argv = []): void
     {
@@ -35,7 +32,7 @@ class App
             $command_name = $argv[1];
         }
 
-        $command = $this->getCommand($command_name);
+        $command = $this->registry->get($command_name);
         if($command === null) {
             $this->printer->display("ERROR: Command \"$command_name\" not found");
             exit;
