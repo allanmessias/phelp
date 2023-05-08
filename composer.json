@@ -1,0 +1,17 @@
+{
+    "name": "allan/phelper",
+    "description": "A PHP's CLI helper for your PHP projects",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Allan\\Phelper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "allan",
+            "email": "allan.messias@hostweb.com.br"
+        }
+    ],
+    "require": {}
+}
