@@ -1,8 +1,8 @@
 <?php
 
-namespace Phelper;
+namespace Lib\Phelper;
 
-class CommandRegistry 
+class CommandRegistry
 {
     protected $registry = [];
 

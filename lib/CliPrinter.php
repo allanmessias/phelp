@@ -1,6 +1,6 @@
 <?php
 
-namespace Phelper;
+namespace Lib\Phelper;
 
 class CliPrinter
 {

@@ -1,14 +1,15 @@
-<?php 
+<?php
 
-namespace Phelper;
-use Phelper\CliPrinter;
+namespace Lib\Phelper;
+
+use Lib\Phelper\CliPrinter;
 
 class App
 {
     protected CliPrinter $printer;
     protected CommandRegistry $registry;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->printer = new CliPrinter();
         $this->registry = new CommandRegistry();
@@ -28,12 +29,12 @@ class App
     public function runCommand(array $argv = []): void
     {
         $command_name = "World";
-        if(isset($argv[1])) {
+        if (isset($argv[1])) {
             $command_name = $argv[1];
         }
 
         $command = $this->registry->get($command_name);
-        if($command === null) {
+        if ($command === null) {
             $this->printer->display("ERROR: Command \"$command_name\" not found");
             exit;
         }
@@ -41,6 +42,3 @@ class App
         call_user_func($command, $argv);
     }
 }
-
-
-
