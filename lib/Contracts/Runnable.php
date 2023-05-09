@@ -1,8 +1,8 @@
 <?php
 
-namespace Lib\Contracts\Phelper;
+namespace Phelper\Contracts;
 
 interface Runnable
 {
-    public function run(string $argv);
+    public function run(array $argv);
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lib\Phelper;
+namespace Phelper;
 
 use Exception;
-use Lib\Phelper\CommandController;
+use Phelper\CommandController;
 
 class CommandRegistry
 {
@@ -26,7 +26,7 @@ class CommandRegistry
         return isset($this->registry[$command]) ? $this->registry[$command] : null;
     }
 
-    public function getController(string $command): CommandController
+    public function getController(string $command): CommandController | null
     {
         return isset($this->controllers[$command]) ? $this->controllers[$command] : null;
     }
@@ -34,11 +34,9 @@ class CommandRegistry
     public function getCallable(string $command)
     {
         $controller = $this->getController($command);
-        if (!$controller) {
-            throw new Exception("Controller not found.");
+        if ($controller) {
+            return [$controller, 'run'];
         }
-
-        return [$controller, 'run'];
 
         $command = $this->get($command);
         if ($command === null) {

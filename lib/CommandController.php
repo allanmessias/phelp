@@ -1,8 +1,8 @@
 <?php
 
-namespace Lib\Phelper;
+namespace Phelper;
 
-use Lib\Phelper\App;
+use Phelper\App;
 
 abstract class CommandController
 {

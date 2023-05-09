@@ -2,12 +2,12 @@
 
 namespace App\Command;
 
-use Lib\Phelper\CommandController;
-use Lib\Contracts\Phelper\Runnable;
+use Phelper\CommandController;
+use Phelper\Contracts\Runnable;
 
 class HelloController extends CommandController implements Runnable
 {
-    public function run(string $argv)
+    public function run(array $argv)
     {
         $name = isset($argv[2]) ? $argv[2] : "World";
         $this->getApp()->getPrinter()->display("Hello $name");

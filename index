@@ -1,5 +1,8 @@
-!#/usr/bin/php
+#!/usr/bin/php
 <?php
+
+use Phelper\App;
+use App\Command\HelloController;
 
 if (php_sapi_name() !== 'cli') {
     exit;
@@ -7,15 +10,11 @@ if (php_sapi_name() !== 'cli') {
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Phelper\App;
-
 $app = new App();
-$app->registerCommand("hello", function (array $argv) use ($app) {
-    $name = isset($argv[2]) ? $argv[2] : 'World';
-    $app->getPrinter()->display("Hello $name");
-});
 
-$app->registerCommand("help", function (array $argv) use ($app) {
+$app->registerController('hello', new HelloController($app));
+
+$app->registerCommand('help', function (array $argv) use ($app) {
     $app->getPrinter()->display("usage: Phelper hello [ your-name ]");
 });
 

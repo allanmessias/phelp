@@ -1,9 +1,10 @@
 <?php
 
-namespace Lib\Phelper;
+namespace Phelper;
 
 use Exception;
-use Lib\Phelper\CliPrinter;
+use Phelper\CliPrinter;
+use Phelper\CommandRegistry;
 
 class App
 {
@@ -30,7 +31,6 @@ class App
     {
         return $this->printer;
     }
-
 
     public function runCommand(array $argv = [], string $defaultCommand = 'help'): void
     {
