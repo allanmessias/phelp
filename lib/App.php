@@ -5,6 +5,7 @@ namespace Phelper;
 use Exception;
 use Phelper\CliPrinter;
 use Phelper\CommandRegistry;
+use Phelper\Command;
 
 class App
 {
@@ -17,14 +18,14 @@ class App
         $this->registry = new CommandRegistry();
     }
 
-    public function registerController($name, CommandController $controller): void
+    public function registerController(Command $command, CommandController $controller): void
     {
-        $this->registry->registerController($name, $controller);
+        $this->registry->registerController($command, $controller);
     }
 
-    public function registerCommand(string $name, callable $callable): void
+    public function registerCommand(Command $command, callable $callable): void
     {
-        $this->registry->register($name, $callable);
+        $this->registry->register($command, $callable);
     }
 
     public function getPrinter(): CliPrinter
@@ -32,13 +33,11 @@ class App
         return $this->printer;
     }
 
-    public function runCommand(array $argv = [], string $defaultCommand = 'help'): void
+    public function runCommand(array $argv = [], Command $defaultCommand = new Command('help')): void
     {
         $command = $defaultCommand;
-        if (isset($argv[1])) {
-            $command = $argv[1];
-        }
-
+        isset($argv[1]) ? $command = new Command($argv[1]) : null;
+        
         try {
             call_user_func($this->registry->getCallable($command), $argv);
         } catch (Exception $e) {
