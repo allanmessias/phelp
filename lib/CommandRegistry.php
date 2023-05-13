@@ -40,7 +40,7 @@ class CommandRegistry
         return isset($this->controllers[$command]) ? $this->controllers[$command] : null;
     }
 
-    public function getCallable(Command $command): Command | array
+    public function getCallable(Command $command): Command | array | Closure
     {
         $controller = $this->getController($command->getName());
     

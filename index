@@ -2,9 +2,7 @@
 <?php
 
 use Phelper\App;
-use App\Command\HelloController;
-use Phelper\Command;
-use Phelper\CommandRegistry;
+use App\Command\HelpCommand;
 
 if (php_sapi_name() !== 'cli') {
     exit;
@@ -13,13 +11,10 @@ if (php_sapi_name() !== 'cli') {
 require __DIR__ . '/vendor/autoload.php';
 
 $app = new App();
-$defaultCommand = new Command('help');
-$commands = new CommandRegistry();
+$helpCommand = new HelpCommand;
 
-$app->registerController(new Command('hello'), new HelloController($app));
-
-$app->registerCommand($defaultCommand, function (array $argv) use ($app) {
-    $app->getPrinter()->display("usage: Phelper hello [ your-name ]");
+$app->registerCommand($helpCommand, function (array $argv) use ($app, $helpCommand) {
+    $app->getPrinter()->display($helpCommand->getDescription());
 });
 
 $app->runCommand($argv);
