@@ -1,5 +1,6 @@
 <?php
 use Phelper\Command;
+use Phelper\CommandList;
 
 beforeEach(function () {
     $this->command = new Command('teste');
@@ -19,28 +20,3 @@ it("should return false if the command that was provided don't exist", function 
 ]);
 
 
-class CommandList 
-{   
-    private array $commands; 
-
-    public function __construct(array $commands)
-    {
-        $this->commands = $commands;
-    }
-
-    public function has(Command $command): bool
-    {
-        return isset($this->commands[$command->getName()]); 
-    }
-
-    public function get(Command $command): Command | null
-    {
-        if($this->has($command)) return $command;
-        return null;
-    }
-
-    public function add(Command $command)
-    {
-        $this->commands[$command->getName()] = $command;
-    }
-}
